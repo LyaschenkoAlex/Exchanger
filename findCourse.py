@@ -1,7 +1,14 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 import re
-
+import time
 import requests
 from bs4 import BeautifulSoup
+
+
+def to_string(USD_buy, USD_sell, EUR_buy, EUR_sell, RUB_buy, RUB_sell, bank_name):
+    return bank_name + ' ' + USD_buy + ' ' + USD_sell + ' ' + EUR_buy + ' ' + EUR_sell + ' ' + RUB_buy + ' ' + RUB_sell + '\n'
 
 
 def find_privat_bank():
@@ -24,6 +31,7 @@ def find_privat_bank():
     print('USD_sell - ' + USD_sell)
     print('RUB_buy - ' + RUB_buy)
     print('RUB_sell - ' + RUB_sell)
+    return to_string(USD_buy, USD_sell, EUR_buy, EUR_sell, RUB_buy, RUB_sell, 'privat')
 
 
 def find_bank_gov():
@@ -45,6 +53,7 @@ def find_bank_gov():
     RUB = float(re.findall(r'Російський рубль</a></td><td data-label="Курс">[^<]+', str_course_container)[0][
                 47:].strip().replace(',', '.')) / 10
     print('RUB - ' + str(RUB))
+    return 'gov' + ' ' + str(USD) + ' ' + str(EUR) + ' ' + str(RUB) + '\n'
 
 
 def find_credit_agricole():
@@ -68,6 +77,7 @@ def find_credit_agricole():
     print('EUR_sell ' + EUR_sell)
     print('RUB_buy ' + RUB_buy)
     print('RUB_sell ' + RUB_sell)
+    return to_string(USD_buy, USD_sell, EUR_buy, EUR_sell, RUB_buy, RUB_sell, 'agricole')
 
 
 def find_ukrsibbank():
@@ -89,6 +99,7 @@ def find_ukrsibbank():
     print('EUR_sell ' + EUR_sell)
     print('RUB_buy ' + RUB_buy)
     print('RUB_sell ' + RUB_sell)
+    return to_string(USD_buy, USD_sell, EUR_buy, EUR_sell, RUB_buy, RUB_sell, 'ukrsibbank')
 
 
 def find_oschadbank():
@@ -115,11 +126,19 @@ def find_oschadbank():
     print('EUR_sell - ' + EUR_sell)
     print('RUB_buy - ' + RUB_buy)
     print('RUB_sell - ' + RUB_sell)
+    return to_string(USD_buy, USD_sell, EUR_buy, EUR_sell, RUB_buy, RUB_sell, 'oschadbank')
 
 
 if __name__ == '__main__':
-    find_privat_bank()
-    find_bank_gov()
-    find_credit_agricole()
-    find_ukrsibbank()
-    find_oschadbank()
+    while True:
+        try:
+            with open('/home/alex/IdeaProjects/Exchanger/output.txt', 'w') as f:
+                f.write(find_bank_gov())
+                f.write(find_privat_bank())
+                f.write(find_credit_agricole())
+                f.write(find_ukrsibbank())
+                f.write(find_oschadbank())
+            print('file closed')
+            time.sleep(60 * 60 * 6)
+        except:
+            pass
