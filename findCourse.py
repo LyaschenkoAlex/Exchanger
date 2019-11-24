@@ -35,7 +35,7 @@ def find_privat_bank():
 
 
 def find_bank_gov():
-    url = 'https://bank.gov.ua/markets/exchangerates/?date=15.11.2019&period=daily'
+    url = 'https://bank.gov.ua/markets/exchangerates/?period=daily'
     response = requests.get(url)
     soup = BeautifulSoup(response.text, 'html.parser')
     str_course_container = ''

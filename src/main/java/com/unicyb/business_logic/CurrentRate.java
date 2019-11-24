@@ -1,6 +1,9 @@
 package com.unicyb.business_logic;
 
 import com.unicyb.data.Course;
+import com.unicyb.data.MonthlyRating;
+import com.unicyb.repositories.CourseRepository;
+import com.unicyb.repositories.MonthlyRatingRepository;
 
 import java.io.*;
 import java.time.LocalDateTime;
@@ -63,5 +66,28 @@ public class CurrentRate {
         return new Course(bankId, Double.parseDouble(buyUSD), Double.parseDouble(buyUSD),
                 Double.parseDouble(buyEUR), Double.parseDouble(buyEUR), Double.parseDouble(buyRUB),
                 Double.parseDouble(buyRUB), dtf.format(now));
+    }
+
+
+    public static void asyncChangeCurrentRate(MonthlyRatingRepository monthlyRatingRepository, CourseRepository courseRepository) {
+        CurrentRate currentRate = new CurrentRate();
+        while (true) {
+
+            currentRate.readFromFile().forEach(course -> courseRepository.save(course));
+            Course course = currentRate.readFromFile().get(0);
+            String date = course.getDate().split(" ")[0];
+            date = date.substring(5);
+            String month = date.split("/")[0];
+            String day = date.split("/")[1];
+            String formattedDate = day + "." + month;
+            if (!monthlyRatingRepository.getById(monthlyRatingRepository.maxId()).getDate().equals(formattedDate)) {
+                monthlyRatingRepository.save(new MonthlyRating(course.getBuyUSD(), course.getBuyEUR(), course.getBuyRUB(), formattedDate));
+            }
+            try {
+                Thread.sleep(60 * 60 * 1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
