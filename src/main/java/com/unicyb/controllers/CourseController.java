@@ -1,6 +1,8 @@
 package com.unicyb.controllers;
 
+import com.unicyb.data.Bank;
 import com.unicyb.data.Course;
+import com.unicyb.repositories.BankRepository;
 import com.unicyb.repositories.CourseRepository;
 import com.unicyb.business_logic.CurrentRate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,20 +13,29 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.*;
+
 @Controller
-@RequestMapping("/course")
+@RequestMapping("/courses")
 public class CourseController {
     @Autowired
     CourseRepository courseRepository;
+    @Autowired
+    BankRepository bankRepository;
 
     @GetMapping
     public String getBankCourses(Model model) {
-
+        List<Map<String, Course>> bankNamesAndCourses = new ArrayList<>(5);
+        Course course;
         int maxId = courseRepository.maxId();
-        Course course = courseRepository.findById(maxId).get();
-
-        model.addAttribute("course", course);
-        return "hello_world";
+        for (int i = maxId; i > maxId - 5; i--) {
+            Map<String, Course> bankNameAndCourse = new HashMap<>(1);
+            course = courseRepository.findById(i).get();
+            bankNameAndCourse.put(bankRepository.findById(course.getBankId()).get().getName(),course);
+            bankNamesAndCourses.add(bankNameAndCourse);
+        }
+        model.addAttribute("coursesAndBanks", bankNamesAndCourses);
+        return "courses";
     }
 
     @EventListener(ApplicationReadyEvent.class)
@@ -43,5 +54,17 @@ public class CourseController {
             }
         }
     }
+
+//    private void showBankCourses(Model model, int maxId) {
+//        List<Map<String, Course>> bankNamesAndCourses = new ArrayList<>(5);
+//        Course course;
+//        for (int i = maxId; i > maxId - 5; i--) {
+//            Map<String, Course> bankNameAndCourse = new HashMap<>(1);
+//            course = courseRepository.findById(i).get();
+//            bankNameAndCourse.put(bankRepository.findById(course.getId()).get().getName(),course);
+//            bankNamesAndCourses.add(bankNameAndCourse);
+//        }
+//        model.addAttribute("coursesAndBanks", bankNamesAndCourses);
+//    }
 
 }

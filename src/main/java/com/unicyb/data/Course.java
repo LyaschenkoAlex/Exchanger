@@ -7,7 +7,6 @@ import javax.validation.constraints.NotNull;
 
 
 @RequiredArgsConstructor
-//@NoArgsConstructor(access=AccessLevel.PRIVATE, force=true)
 @Data
 @Entity
 @Table(name = "course")
