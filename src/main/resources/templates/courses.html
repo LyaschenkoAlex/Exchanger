@@ -4,6 +4,8 @@
     <title>Exchanger</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.3.0/Chart.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="./style/style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
@@ -38,5 +40,50 @@
         </th:block>
     </table>
 </div>
+<div class="wrapper">
+    <canvas id="myChart" style="width:1000px !important; height: 600px !important;"></canvas>
+</div>
 </body>
+<script th:inline="javascript">
+    // Our labels along the x-axis
+    // var years = [1500, 1600, 1700, 1750, 1800, 1850, 1900, 1950, 1999, 2050];
+    var date = [[${courseDate}]];
+    var EUR = [[${courseEUR}]];
+    var USD = [[${courseUSD}]];
+    var RUB = [[${courseRUB}]];
+
+    var ctx = document.getElementById("myChart");
+    // ctx.width(800);
+    ctx.height = 100;
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: date,
+            options: {
+                maintainAspectRatio: false,
+                responsive: true
+            },
+            datasets: [
+                {
+                    data: EUR,
+                    label: "EUR",
+                    borderColor: "#3e95cd",
+                    fill: false
+                },
+                {
+                    data: USD,
+                    label: "USD",
+                    borderColor: "#8e5ea2",
+                    fill: false
+                },
+                {
+                    data: RUB,
+                    label: "RUB",
+                    borderColor: "#3cba9f",
+                    fill: false
+                }
+            ]
+        }
+    });
+</script>
 </html>
