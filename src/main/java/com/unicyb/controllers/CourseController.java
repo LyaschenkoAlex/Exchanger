@@ -22,12 +22,15 @@ import java.util.stream.Collectors;
 @Controller
 @RequestMapping("/courses")
 public class CourseController {
-    @Autowired
-    CourseRepository courseRepository;
-    @Autowired
-    BankRepository bankRepository;
-    @Autowired
-    MonthlyRatingRepository monthlyRatingRepository;
+    final CourseRepository courseRepository;
+    final BankRepository bankRepository;
+    final MonthlyRatingRepository monthlyRatingRepository;
+
+    public CourseController(CourseRepository courseRepository, BankRepository bankRepository, MonthlyRatingRepository monthlyRatingRepository) {
+        this.courseRepository = courseRepository;
+        this.bankRepository = bankRepository;
+        this.monthlyRatingRepository = monthlyRatingRepository;
+    }
 
     @GetMapping
     public String getBankCourses(Model model) {

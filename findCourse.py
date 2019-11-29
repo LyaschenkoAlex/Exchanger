@@ -135,7 +135,7 @@ if __name__ == '__main__':
             with open('/home/alex/IdeaProjects/Exchanger/output.txt', 'w') as f:
                 f.write(find_bank_gov())
                 f.write(find_privat_bank())
-                f.write(find_credit_agricole())
+                # f.write(find_credit_agricole())
                 f.write(find_ukrsibbank())
                 f.write(find_oschadbank())
             print('file closed')
