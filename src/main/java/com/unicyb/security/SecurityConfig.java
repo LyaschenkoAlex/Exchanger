@@ -33,9 +33,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/courses/**")
+                .antMatchers("/user_info/**")
                 .access("hasRole('ROLE_USER')")
-                .antMatchers("/", "/**").access("permitAll")
+                .antMatchers("/login/**", "/register/**").access("anonymous")
+                .antMatchers("/courses ")
+                .access("permitAll")
                 //end::authorizeRequests[]
 
                 .and()

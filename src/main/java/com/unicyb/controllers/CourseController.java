@@ -11,16 +11,19 @@ import com.unicyb.repositories.MonthlyRatingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.security.Principal;
 import java.util.*;
 import java.util.stream.Collectors;
 
 @Controller
-@RequestMapping("/courses")
+@RequestMapping("/exchange_rates")
 public class CourseController {
     final CourseRepository courseRepository;
     final BankRepository bankRepository;
@@ -33,9 +36,11 @@ public class CourseController {
     }
 
     @GetMapping
-    public String getBankCourses(Model model) {
+    public String getBankCourses(Model model, Principal principal) {
         CourseControllerLogic.addTable(model, bankRepository, courseRepository);
         CourseControllerLogic.addPlot(model, monthlyRatingRepository);
+        System.out.println(SecurityContextHolder.getContext().getAuthentication().getName());
+        model.addAttribute("role", SecurityContextHolder.getContext().getAuthentication().getName());
         return "courses";
     }
 
