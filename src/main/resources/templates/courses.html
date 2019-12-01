@@ -15,8 +15,9 @@
 <body>
 <div class="table-responsive">
     <div th:switch="${role}">
+        <a th:href="main_page">Go to the main page</a>
         <a th:case="'anonymousUser'" th:href="login">Login</a>
-        <a th:case="*" th:href="main_page">Go to the main page</a>
+        <a th:case="*" th:href="user_page">Go to the user page</a>
     </div>
 <!--    <a href="#" th:text="${role}"></a>-->
     <table class="table table-striped table-bordered">

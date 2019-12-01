@@ -10,8 +10,8 @@ public class WebConfig implements WebMvcConfigurer {
   // tag::customLoginViewController[]
   @Override
   public void addViewControllers(ViewControllerRegistry registry) {
-    registry.addViewController("/").setViewName("mainPage");
-    registry.addViewController("/main_page").setViewName("mainPage");
+//    registry.addViewController("/").setViewName("mainPage");
+//    registry.addViewController("/main_page").setViewName("mainPage");
     registry.addViewController("/login");
   }
 
