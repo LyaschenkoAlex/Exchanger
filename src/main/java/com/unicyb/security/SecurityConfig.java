@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.password.StandardPasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 //end::securityConfigOuterClass[]
 //tag::baseBonesImports[]
@@ -46,11 +47,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/login")
                 .defaultSuccessUrl("/main_page")
                 //end::customLoginPage[]
+                .and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login")
 
                 // tag::enableLogout[]
-                .and()
-                .logout()
-                .logoutSuccessUrl("/")
+//                .and()
+//                .logout()
+//                .logoutUrl("/logout")
+//                .logoutSuccessUrl("/main_page")
                 // end::enableLogout[]
 
                 .and()

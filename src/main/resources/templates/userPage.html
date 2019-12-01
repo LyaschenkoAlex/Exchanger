@@ -1,1 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+    <title>Card Clock Bootstrap 4 | BootstrapTema</title>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta.2/css/bootstrap.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
 <h1>Hello, it's user page!</h1>
+<a th:href="logout">Logout</a>
+<a th:href="exchange_rates">Show exchange rates</a>
+<a th:href="main_page">Go to the main page</a>
+<form accept-charset="UTF-8" role="form" method="POST" th:action="@{/user_page}" id="ExchangeHistory">
+    <fieldset>
+        <!--        <label for="date">qqq</label><input class="form-control" placeholder="money" type="text" name="date" id="date">-->
+        <label for="exchangeSell">How many money you sell</label><input class="form-control" placeholder="1000.00"
+                                                                        type="text" name="exchangeSell"
+                                                                        id="exchangeSell">
+        <label for="exchangeBuy">How many money you buy</label><input class="form-control" placeholder="1000.00"
+                                                                      type="text" name="exchangeBuy" id="exchangeBuy">
+        <input type="date" id="start" name="date" value="2019-12-06" min="2018-01-01" max="2019-12-31">
+        <input type="submit" value="update">
+    </fieldset>
+    <select name="chooseSellCurrency" form="ExchangeHistory">
+        <option value="UAN">UAN</option>
+        <option value="EUR">EUR</option>
+        <option value="USD">USD</option>
+        <option value="RUB">RUB</option>
+    </select>
+    <select name="chooseBuyCurrency" form="ExchangeHistory">
+        <option value="UAN">UAN</option>
+        <option value="EUR">EUR</option>
+        <option value="USD">USD</option>
+        <option value="RUB">RUB</option>
+    </select>
+</form>
+<div>
+    <table class="table table-striped">
+        <tr>
+            <th>Date</th>
+            <th>What you sell</th>
+            <th>What you buy</th>
+        </tr>
+        <th:block th:each="exchange : ${exchangers}">
+            <tr>
+                <td th:text="${exchange.getDate()}">Date</td>
+                <td th:text="${exchange.getExchangeSell() + ' ' + exchange.getChooseSellCurrency()}">What you sell</td>
+                <td th:text="${exchange.getExchangeBuy() + ' ' + exchange.getChooseBuyCurrency()}">What you buy</td>
+            </tr>
+        </th:block>
+
+    </table>
+</div>
+</body>
+</html>
