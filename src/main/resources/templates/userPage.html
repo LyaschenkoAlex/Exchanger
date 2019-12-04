@@ -12,40 +12,47 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-<h1>Hello, it's user page!</h1>
 <a th:href="logout">Logout</a>
 <a th:href="exchange_rates">Show exchange rates</a>
 <a th:href="main_page">Go to the main page</a>
+<h1>&emsp;&emsp;&emsp;&emsp;Hello, it's user page!</h1>
+
 <form accept-charset="UTF-8" role="form" method="POST" th:action="@{/user_page}" id="ExchangeHistory">
     <fieldset>
         <!--        <label for="date">qqq</label><input class="form-control" placeholder="money" type="text" name="date" id="date">-->
-        <label for="exchangeSell">How many money you sell</label><input class="form-control" placeholder="1000.00"
-                                                                        type="text" name="exchangeSell"
-                                                                        id="exchangeSell">
-        <label for="exchangeBuy">How many money you buy</label><input class="form-control" placeholder="1000.00"
-                                                                      type="text" name="exchangeBuy" id="exchangeBuy">
+        <label for="exchangeSell">Сurrency you exchanged</label><input style="width:100px" class="form-control" placeholder="1000.00"
+                                                                       type="text" name="exchangeSell"
+                                                                       id="exchangeSell">
+        <select name="chooseSellCurrency" form="ExchangeHistory">
+            <option value="UAN">UAN</option>
+            <option value="EUR">EUR</option>
+            <option value="USD">USD</option>
+            <option value="RUB">RUB</option>
+        </select>
+        <br>
+        <label for="exchangeBuy">Сurrency you received</label><input style="width:100px" class="form-control" placeholder="1000.00"
+                                                                     type="text" name="exchangeBuy" id="exchangeBuy">
+        <select name="chooseBuyCurrency" form="ExchangeHistory">
+            <option value="UAN">UAN</option>
+            <option value="EUR">EUR</option>
+            <option value="USD">USD</option>
+            <option value="RUB">RUB</option>
+        </select>
+        <br>
         <input type="date" id="start" name="date" value="2019-12-06" min="2018-01-01" max="2019-12-31">
+
+        <br>
         <input type="submit" value="update">
     </fieldset>
-    <select name="chooseSellCurrency" form="ExchangeHistory">
-        <option value="UAN">UAN</option>
-        <option value="EUR">EUR</option>
-        <option value="USD">USD</option>
-        <option value="RUB">RUB</option>
-    </select>
-    <select name="chooseBuyCurrency" form="ExchangeHistory">
-        <option value="UAN">UAN</option>
-        <option value="EUR">EUR</option>
-        <option value="USD">USD</option>
-        <option value="RUB">RUB</option>
-    </select>
+
+
 </form>
 <div>
     <table class="table table-striped">
         <tr>
             <th>Date</th>
-            <th>What you sell</th>
-            <th>What you buy</th>
+            <th>Сurrency you exchanged</th>
+            <th>Сurrency you received</th>
         </tr>
         <th:block th:each="exchange : ${exchangers}">
             <tr>

@@ -37,28 +37,42 @@
 
     <!-- flexbox clock row -->
     <div class="row">
-        <h1>Exchanger</h1>
-        <div class="col-md-3 center-block">
-            <div class="card bg-dark text-white">
-                <h3 class="card-title text-center">
-                    <div class="d-flex flex-wrap justify-content-center mt-2">
-                        <a><span class="badge hours"></span></a> :
-                        <a><span class="badge min"></span></a> :
-                        <a><span class="badge sec"></span></a>
-                    </div>
-                </h3>
-            </div>
-        </div>
+        <h1>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Exchanger</h1>
+<!--        <div class="col-md-3 center-block">-->
+<!--            <div class="card bg-dark text-white">-->
+<!--                <h3 class="card-title text-center">-->
+<!--                    <div class="d-flex flex-wrap justify-content-center mt-2">-->
+<!--                        <a><span class="badge hours"></span></a> :-->
+<!--                        <a><span class="badge min"></span></a> :-->
+<!--                        <a><span class="badge sec"></span></a>-->
+<!--                    </div>-->
+<!--                </h3>-->
+<!--            </div>-->
+<!--        </div>-->
 
     </div><!-- /.container -->
     <div>
+        <p>
+            <br><br>
+            &emsp;Програма показує курс валют (купівля, продаж) банків України
+            на поточний час. Цей програмний продукт корисний для
+            найвигіднішого обміну валют. В порівнянні з аналогічними продуктами, дане рішення має перевагу
+            у відсутності реклами, оптимізоване для роботи в    низькошвидкісних мережах.
+            <br>
+            <br>
+            В особистому кабінеті можна переглянути історію ваших обмінів валют.
+        </p>
+    </div>
+    <div class="align-self-center">
         <div th:switch="${role}">
             <div th:case="'anonymousUser'">
                 <a th:href="login">Login</a>
+                <br>
                 <a th:href="register">New? Register now</a>
             </div>
             <div th:case="*">
                 <a th:href="logout">Logout</a>
+                <br>
                 <a th:href="user_page">Personal area</a>
             </div>
             <a th:href="exchange_rates">Show exchanger rates</a>
