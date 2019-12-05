@@ -28,7 +28,7 @@ public class CurrentRate {
             while ((str = br.readLine()) != null) {
                 String[] currentRateOfBank = str.split(" ");
                 switch (currentRateOfBank[0]) {
-                    case "privat":
+                    case "private":
                         listOfCourses.add(saveCurrentRate(currentRateOfBank, 2));
                         break;
                     case "agricole":
