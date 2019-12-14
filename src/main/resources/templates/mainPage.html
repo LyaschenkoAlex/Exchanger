@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+    <title>Card Clock Bootstrap 4 | BootstrapTema</title>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta.2/css/bootstrap.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <style>
+        body {
+            background: #C9D6FF;
+            background: -webkit-linear-gradient(to right, #E2E2E2, #C9D6FF);
+            background: linear-gradient(to right, #E2E2E2, #C9D6FF);
+        }
+
+        @font-face {
+            /* download clock font: http://bootstraptema.ru/stuff/0-0-0-2478-20 */
+            font-family: "alarm clock";
+            src: url("alarm_clock.eot?") format("eot"),
+            url("alarm_clock.woff") format("woff"),
+            url("alarm_clock.ttf") format("truetype"),
+            url("alarm_clock.svg#alarmclock") format("svg");
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        h3, a {
+            font-family: 'alarm clock';
+        }
+    </style>
+</head>
+<body>
+
+<div class="container mb-3">
+    <div class="clearfix"></div>
+    <hr/>
+
+    <!-- flexbox clock row -->
+    <div class="row">
+        <h1>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Exchanger</h1>
+        <!--        <div class="col-md-3 center-block">-->
+        <!--            <div class="card bg-dark text-white">-->
+        <!--                <h3 class="card-title text-center">-->
+        <!--                    <div class="d-flex flex-wrap justify-content-center mt-2">-->
+        <!--                        <a><span class="badge hours"></span></a> :-->
+        <!--                        <a><span class="badge min"></span></a> :-->
+        <!--                        <a><span class="badge sec"></span></a>-->
+        <!--                    </div>-->
+        <!--                </h3>-->
+        <!--            </div>-->
+        <!--        </div>-->
+
+    </div><!-- /.container -->
+    <div>
+        <p>
+            <br><br>
+            &emsp;Програма показує курс валют (купівля, продаж) банків України
+            на поточний час. Цей програмний продукт корисний для
+            найвигіднішого обміну валют. В порівнянні з аналогічними продуктами, дане рішення має перевагу
+            у відсутності реклами, оптимізоване для роботи в низькошвидкісних мережах.
+            <br>
+            <br>
+            &emsp;В особистому кабінеті можна переглянути історію ваших обмінів валют.
+        </p>
+    </div>
+    <div class="align-self-center">
+        <div th:switch="${role}">
+            <div th:case="'anonymousUser'">
+                <a th:href="login">Login</a>
+                <br>
+                <a th:href="register">New? Register now</a>
+            </div>
+            <div th:case="*">
+                <a th:href="@{logout}">Logout</a>
+                <br>
+                <a th:href="user_page">Personal area</a>
+            </div>
+            <a th:href="exchange_rates">Show exchanger rates</a>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        setInterval(function () {
+            var hours = new Date().getHours();
+            $(".hours").html((hours < 10 ? "0" : "") + hours);
+        }, 1000);
+        setInterval(function () {
+            var minutes = new Date().getMinutes();
+            $(".min").html((minutes < 10 ? "0" : "") + minutes);
+        }, 1000);
+        setInterval(function () {
+            var seconds = new Date().getSeconds();
+            $(".sec").html((seconds < 10 ? "0" : "") + seconds);
+        }, 1000);
+    });
+</script>
+</body>
+</html>
