@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/exchange_rates")
-public class CourseController {
+class CourseController {
     final CourseRepository courseRepository;
     final BankRepository bankRepository;
     final MonthlyRatingRepository monthlyRatingRepository;
@@ -36,7 +36,7 @@ public class CourseController {
     }
 
     @GetMapping
-    public String getBankCourses(Model model, Principal principal) {
+    public String getBankCourses(Model model) {
         CourseControllerLogic.addTable(model, bankRepository, courseRepository);
         CourseControllerLogic.addPlot(model, monthlyRatingRepository);
         System.out.println(SecurityContextHolder.getContext().getAuthentication().getName());
@@ -45,7 +45,7 @@ public class CourseController {
     }
 
     @EventListener(ApplicationReadyEvent.class)
-    public void doSomethingAfterStartup() {
+    public void updateCoursesAfterStartup() {
         CurrentRate.asyncChangeCurrentRate(monthlyRatingRepository, courseRepository);
     }
 

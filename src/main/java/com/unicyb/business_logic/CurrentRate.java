@@ -19,7 +19,7 @@ public class CurrentRate {
 
 
     public List<Course> readFromFile() {
-        File file = new File("/home/alex/IdeaProjects/Exchanger/output.txt");
+        File file = new File("C:/Users/lyasc/IdeaProjects/Exchanger/output.txt");
         List<Course> listOfCourses = new ArrayList<>(5);
         BufferedReader br;
         try {

@@ -10,6 +10,23 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <style>
+        ul {
+
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #e1e1e1;
+        }
+        ul li {
+            display: inline;
+        }
+
+        label {
+            display: inline;
+        }
+    </style>
 </head>
 <body>
 <a th:href="logout">Logout</a>
@@ -19,29 +36,42 @@
 <form accept-charset="UTF-8" role="form" method="POST" th:action="@{/user_page}" id="ExchangeHistory">
     <fieldset>
         <!--        <label for="date">qqq</label><input class="form-control" placeholder="money" type="text" name="date" id="date">-->
-        <label for="exchangeSell">Сurrency you exchanged</label><input style="width:100px" class="form-control" placeholder="1000.00"
-                                                                       type="text" name="exchangeSell"
-                                                                       id="exchangeSell">
-        <select name="chooseSellCurrency" form="ExchangeHistory">
-            <option value="UAN">UAN</option>
-            <option value="EUR">EUR</option>
-            <option value="USD">USD</option>
-            <option value="RUB">RUB</option>
-        </select>
-        <br>
-        <label for="exchangeBuy">Сurrency you received</label><input style="width:100px" class="form-control" placeholder="1000.00"
-                                                                     type="text" name="exchangeBuy" id="exchangeBuy">
-        <select name="chooseBuyCurrency" form="ExchangeHistory">
-            <option value="UAN">UAN</option>
-            <option value="EUR">EUR</option>
-            <option value="USD">USD</option>
-            <option value="RUB">RUB</option>
-        </select>
-        <br>
-        <input type="date" id="start" name="date" value="2019-12-06" min="2018-01-01" max="2019-12-31">
+
+        <ul>
+            <li>
+                <label for="exchangeSell">Сurrency you exchanged</label><input style="width:100px" class="form-control"
+                                                                               placeholder="1000.00"
+                                                                               type="text" name="exchangeSell"
+                                                                               id="exchangeSell">
+                <select name="chooseSellCurrency" form="ExchangeHistory">
+                    <option value="UAN">UAN</option>
+                    <option value="EUR">EUR</option>
+                    <option value="USD">USD</option>
+                    <option value="RUB">RUB</option>
+                </select>
+            </li>
+            <li>
+                <label for="exchangeBuy">Сurrency you received</label><input style="width:100px" class="form-control"
+                                                                             placeholder="1000.00"
+                                                                             type="text" name="exchangeBuy" id="exchangeBuy">
+                <select name="chooseBuyCurrency" form="ExchangeHistory">
+                    <option value="UAN">UAN</option>
+                    <option value="EUR">EUR</option>
+                    <option value="USD">USD</option>
+                    <option value="RUB">RUB</option>
+                </select>
+            </li>
+            <li>
+                <input type="date" id="start" name="date" value="2019-12-21" min="2019-01-01" max="2019-12-31">
+
+            </li>
+            <li>
+                <input type="submit" value="update">
+
+            </li>
+        </ul>
 
         <br>
-        <input type="submit" value="update">
     </fieldset>
 
 

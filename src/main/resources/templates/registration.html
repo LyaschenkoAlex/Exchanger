@@ -29,6 +29,9 @@
                 <li class="nav-item">
                     <a class="nav-link" th:href="@{main_page}">Starter page</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/login}">Login</a>
+                </li>
                 <li class="nav-item dropdown">
 
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -40,40 +43,10 @@
                 </li>
 
             </ul>
-            <!--                  <form class="form-inline my-2 my-lg-0">-->
-            <!--                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">-->
-            <!--                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
-            <!--                  </form>-->
-        </div>
+      </div>
     </nav>
 </div>
 
-<!--<div class="row">-->
-<!--    <div class="column">-->
-<!--        <div class="jumbotron">-->
-<!--            </br>-->
-<!--            <h1>Registration</h1>-->
-
-<!--            <p>Enter your name, username, birthday, id, preferences, password</p>-->
-<!--            <p>If you already registered to the site, please <em class="link2"><a th:href="@{/login}">login</a></em></p>-->
-<!--            <form method="POST" th:action="@{/register}" id="registerForm">-->
-
-<!--                <label for="name">Name: </label>-->
-<!--                <div align="left"><input type="text" name="name"/></div>-->
-
-<!--                <br/>-->
-
-<!--                <label for="password">Password: </label>-->
-<!--                <div align="left"><input type="password" name="password"/></div>-->
-<!--                <br/>-->
-
-
-<!--                <div style="padding-left: 70px"><input type="submit" value="Register"/></div>-->
-<!--            </form>-->
-<!--        </div>-->
-
-<!--    </div>-->
-<!--</div>-->
 
 <div class="container">
     <div class="row">
@@ -83,14 +56,20 @@
                     <h3 class="panel-title">Registration form</h3>
                 </div>
                 <div class="panel-body">
-                    <form accept-charset="UTF-8" role="form" method="POST" th:action="@{/register}" id="registerForm">
+                    <form accept-charset="UTF-8" role="form" method="POST" th:action="@{/register}" id="registerForm" th:object="${user}">
+
                         <fieldset>
                             <div class="form-group">
                                 <input class="form-control" placeholder="Username" type="text" name="name" id="username">
+
                             </div>
                             <div class="form-group">
                                 <input class="form-control" placeholder="Password" type="password" name="password"
                                        id="password">
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" placeholder="example@gmail.com" type="text" name="email"
+                                       id="email">
                             </div>
                             <input class="btn btn-lg btn-success btn-block" type="submit" value="Register">
                         </fieldset>

@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 import re
 import time
@@ -8,7 +6,8 @@ from bs4 import BeautifulSoup
 
 
 def to_string(USD_buy, USD_sell, EUR_buy, EUR_sell, RUB_buy, RUB_sell, bank_name):
-    q = str(bank_name) + ' ' + str(USD_buy) + ' ' + str(USD_sell) + ' ' + str(EUR_buy) + ' ' + str(EUR_sell) + ' ' + str(RUB_buy) + ' ' + str(RUB_sell) + '\n'
+    q = str(bank_name) + ' ' + str(USD_buy) + ' ' + str(USD_sell) + ' ' + str(EUR_buy) + ' ' + str(
+        EUR_sell) + ' ' + str(RUB_buy) + ' ' + str(RUB_sell) + '\n'
     return q
 
 
@@ -75,19 +74,25 @@ def find_credit_agricole():
     str_course_container = ''
     for i in soup.find_all('div', attrs="exchange-rates-table"):
         str_course_container += str(i)
+    qq = str_course_container.split(' ')
+    courses_list = []
+    for i in qq:
+        i = i.strip()
+        if i.replace('.', '', 1).isdigit():
+            courses_list.append(i)
     arr_course = re.findall(r'[^>]+<span class="up"></span>', str_course_container)
     arr_course_changed = re.findall(r'[^>]+<span class="equal"></span>', str_course_container)
-    USD_buy = arr_course[0][:arr_course[0].find('<')].strip()
+    USD_buy = courses_list[0]
     USD_buy = round(float(USD_buy), 2)
-    USD_sell = arr_course[1][:arr_course[1].find('<')].strip()
+    USD_sell = courses_list[1]
     USD_sell = round(float(USD_sell), 2)
-    EUR_buy = arr_course_changed[0][:arr_course_changed[0].find('<')].strip()
+    EUR_buy = courses_list[2]
     EUR_buy = round(float(EUR_buy), 2)
-    EUR_sell = arr_course[2][:arr_course[2].find('<')].strip()
+    EUR_sell = courses_list[3]
     EUR_sell = round(float(EUR_sell), 2)
-    RUB_buy = arr_course_changed[1][:arr_course_changed[1].find('<')].strip()
+    RUB_buy = courses_list[4]
     RUB_buy = round(float(RUB_buy), 2)
-    RUB_sell = arr_course[3][:arr_course[3].find('<')].strip()
+    RUB_sell = courses_list[5]
     RUB_sell = round(float(RUB_sell), 2)
     print('CreditAgricole')
     print('USD_buy ' + str(USD_buy))
@@ -164,7 +169,7 @@ def find_oschadbank():
 if __name__ == '__main__':
     while True:
         try:
-            with open('/home/alex/IdeaProjects/Exchanger/output.txt', 'w') as f:
+            with open('C:/Users/lyasc/IdeaProjects/Exchanger/output.txt', 'w') as f:
                 f.write(find_bank_gov())
                 f.write(find_privat_bank())
                 f.write(find_credit_agricole())
